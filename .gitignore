@@ -1,3 +1,4 @@
 /venv
 .env
 src\bitcoin_tweets.duckdb
+dataset
