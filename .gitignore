@@ -1,3 +1,4 @@
 /venv
 .env
 datasrc/bitcoin_tweets.duckdb
+src/bitcoin_tweets.duckdb
