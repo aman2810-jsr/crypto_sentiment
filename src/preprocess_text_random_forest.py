@@ -47,14 +47,19 @@ def parallel_fast_preprocess(texts, chunk_size=10000, num_workers=None):
         results = list(tqdm(pool.imap(process_chunk, chunks), total=len(chunks)))
     return [text for sublist in results for text in sublist]
 
-def run_preprocessing(csv_path="../dataset/monthly_tweets/tweets_with_sentiment_feb_to_july.csv"):
+def run_preprocessing():
+    base_dir = os.path.dirname(os.path.abspath(__file__))  # This gets the full path of the script
+    csv_path = os.path.join(base_dir, '..', 'dataset', 'tweets_with_sentiment_feb_to_july.csv')
+    csv_path = os.path.normpath(csv_path)  # Normalizes path for Windows
+
+    if not os.path.exists(csv_path):
+        raise FileNotFoundError(f"CSV file not found at: {csv_path}")
+
     df = pd.read_csv(csv_path)
-    # Your cleaning steps here
     df = df[df['text'].notna()]
     texts = df['text'].tolist()
     df['preprocess_text'] = parallel_fast_preprocess(texts)
     return df
-
 if __name__ == "__main__":
     # This guard is necessary for multiprocessing on Windows
     df = run_preprocessing()

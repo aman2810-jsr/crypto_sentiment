@@ -7,7 +7,7 @@ start_date = pd.to_datetime("2021-02-01")
 end_date = pd.to_datetime("2021-09-30")
 
 # Output directory
-output_dir = Path("dataset")
+output_dir = Path("dataset/monthly_tweets")
 output_dir.mkdir(parents=True, exist_ok=True)
 
 # Dictionary to collect grouped data
@@ -15,7 +15,7 @@ monthly_data = {}
 
 # Read the CSV in chunks
 chunksize = 100_000
-for chunk in pd.read_csv("data/Bitcoin_tweets.csv", usecols=keep_cols, chunksize=chunksize,engine='python',on_bad_lines='skip'):
+for chunk in pd.read_csv("dataset/Bitcoin_tweets.csv", usecols=keep_cols, chunksize=chunksize,engine='python',on_bad_lines='skip'):
     # Ensure 'date' is datetime type
     chunk['date'] = pd.to_datetime(chunk['date'], errors='coerce')
 
