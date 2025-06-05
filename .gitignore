@@ -2,3 +2,6 @@
 .env
 src/bitcoin_tweets.duckdb
 dataset
+src\bitcoin_word2vec.model
+src\bitcoin_word2vec.model.syn1neg.npy
+src\bitcoin_word2vec.model.wv.vectors.npy
